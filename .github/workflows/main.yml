@@ -29,9 +29,9 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          client-id: ${{ 90b9a999-6ab8-4e12-a888-ea31e1a732d4 }}
+          client-secret: ${{61ecf2aa-09cf-4868-bbdb-da1215cbda8f }}
+          tenant-id: ${{ 61ecf2aa-09cf-4868-bbdb-da1215cbda8f }}
 
       # Step 5: Deploy to Azure Web App - 使用发布配置文件部署
       - name: Deploy to Azure Web App
