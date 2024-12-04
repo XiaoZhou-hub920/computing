@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voting Results</title>
+</head>
+<body>
+    <h1>Voting Results</h1>
+    <ul>
+        {% for option in options %}
+        <li>{{ option.OptionName }}: {{ option.Votes }} votes</li>
+        {% endfor %}
+    </ul>
+    <h2>Results Chart</h2>
+    <img src="{{ chart_url }}" alt="Results Chart">
+    <a href="/">Go Back to Vote</a>
+</body>
+</html>

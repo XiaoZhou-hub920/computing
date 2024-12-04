@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vote for Your Favorite Football Star</title>
+</head>
+<body>
+    <h1>Vote for Your Favorite Football Star</h1>
+    <form action="/vote" method="POST">
+        {% for option in options %}
+        <div>
+            <input type="radio" name="option" value="{{ option.OptionID }}" required>
+            <label>{{ option.OptionName }} - {{ option.Description }}</label>
+        </div>
+        {% endfor %}
+        <div>
+            <label for="user_id">Your ID:</label>
+            <input type="text" id="user_id" name="user_id" required>
+        </div>
+        <button type="submit">Submit Vote</button>
+    </form>
+</body>
+</html>
