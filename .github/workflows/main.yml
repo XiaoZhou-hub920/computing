@@ -20,7 +20,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      # Install system dependencies if necessary (for pyodbc, etc.)
+      # Install system dependencies required for pyodbc
       - name: Install system dependencies
         run: |
           sudo apt-get update
@@ -32,7 +32,7 @@ jobs:
           python -m venv venv
           source venv/bin/activate
 
-      # Install dependencies
+      # Install Python dependencies
       - name: Install dependencies
         run: |
           source venv/bin/activate
