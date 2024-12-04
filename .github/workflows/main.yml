@@ -1,4 +1,4 @@
-name: Build and deploy Python app to Azure Web App - votes
+name: Build and Deploy Python App to Azure Web App
 
 on:
   push:
@@ -11,27 +11,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout code
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # Set up Python version
-      - name: Set up Python version
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      # Install system dependencies required for pyodbc
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y unixodbc-dev gcc g++
-
-      # Create and start virtual environment
-      - name: Create and start virtual environment
+      - name: Install dependencies
         run: |
           python -m venv venv
           source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r project/requirements.txt
 
+      - name: Zip artifact for deployment
+        run: |
+          zip -r release.zip ./* -x "venv/*"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-app
+          path: release.zip
 
   deploy:
     runs-on: ubuntu-latest
@@ -41,21 +44,17 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      # Download artifact from build job
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: python-app
 
-      # Unzip artifact for deployment
       - name: Unzip artifact for deployment
         run: unzip release.zip
 
-      # Deploy to Azure Web App
-      - name: 'Deploy to Azure Web App'
+      - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
-        id: deploy-to-webapp
         with:
-          app-name: 'votes'  # Your Azure Web App name
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_bd94d116e0eb44aa9e6faeda66a6ed79 }}
+          app-name: 'your-app-name'  # 替换为您的 Azure Web 应用名称
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # 使用 Secrets 引用发布配置文件
+          package: './'  # 指定解压后的文件夹
