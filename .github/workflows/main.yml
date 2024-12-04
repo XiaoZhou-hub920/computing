@@ -55,6 +55,6 @@ jobs:
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'your-app-name'  # 替换为您的 Azure Web 应用名称
+          app-name: 'votes'  # 替换为您的 Azure Web 应用名称
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # 使用 Secrets 引用发布配置文件
-          package: './'  # 指定解压后的文件夹
+          package: './project'  # 指定解压后的文件夹
