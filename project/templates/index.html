@@ -1,22 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vote for Your Favorite Football Star</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .vote-option {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+        .vote-option img {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+        .vote-option label {
+            font-size: 1.2em;
+            color: #333;
+        }
+        input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            width: 100%;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1.1em;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
-    <h1>Vote for Your Favorite Football Star</h1>
-    <form action="/vote" method="POST">
-        {% for option in options %}
-        <div>
-            <input type="radio" name="option" value="{{ option.OptionID }}" required>
-            <label>{{ option.OptionName }} - {{ option.Description }}</label>
-        </div>
-        {% endfor %}
-        <div>
-            <label for="user_id">Your ID:</label>
-            <input type="text" id="user_id" name="user_id" required>
-        </div>
-        <button type="submit">Submit Vote</button>
-    </form>
+    <div class="container">
+        <h1>Vote for Your Favorite Football Star</h1>
+        <form action="/vote" method="POST">
+            {% for option in options %}
+            <div class="vote-option">
+                <input type="radio" name="option" value="{{ option.OptionID }}" required>
+                <img src="{{ option.ImageURL }}" alt="{{ option.OptionName }} Image" style="width: 100px; height: 100px; object-fit: cover; border-radius: 10px;"> <!-- Add player image -->
+                <label>{{ option.OptionName }} - {{ option.Description }}</label>
+            </div>
+            {% endfor %}
+            <div>
+                <label for="user_id">Your ID:</label>
+                <input type="text" id="user_id" name="user_id" required>
+            </div>
+            <button type="submit">Submit Vote</button>
+        </form>
+    </div>
 </body>
 </html>
