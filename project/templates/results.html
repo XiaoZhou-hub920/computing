@@ -1,17 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voting Results</title>
 </head>
 <body>
     <h1>Voting Results</h1>
+    
+    <h2>Vote Results by Football Star</h2>
+    
     <ul>
         {% for option in options %}
-        <li>{{ option.OptionName }}: {{ option.Votes }} votes</li>
+        <li>
+            <strong>{{ option.OptionName }}</strong>: {{ option.Votes }} votes
+            <br>
+            <p>{{ option.Description }}</p>
+            <img src="{{ option.ImageURL }}" alt="{{ option.OptionName }} Image" style="width: 100px; height: 100px; object-fit: cover; border-radius: 10px;"> 
+        </li>
         {% endfor %}
     </ul>
-    <h2>Results Chart</h2>
-    <img src="{{ chart_url }}" alt="Results Chart">
+
+    <h2>Chart of Voting Results</h2>
+    <img src="{{ chart_url }}" alt="Voting Results Chart" width="500">
+
+    <br>
     <a href="/">Go Back to Vote</a>
 </body>
 </html>
